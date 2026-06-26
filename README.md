@@ -31,7 +31,55 @@ The application is highly cohesive, modular, and divided into several specialize
 
 ## Getting Started
 
-*(Add instructions here on how to build and run the services, such as Docker Compose commands or Maven run commands, and how to start the React frontend).*
+To run the entire system locally, you need to start the MySQL database and then run each service individually.
+
+### Prerequisites
+- **Java 17+**
+- **Node.js & npm**
+- **MySQL** running on localhost (ensure your credentials in the `application.properties` of each service match your setup).
+
+### 1. Start the Microservices
+Each backend service is a Spring Boot application. You can start them using the provided Maven wrapper (`mvnw`) from their respective nested directories. Open a separate terminal for each service:
+
+**Order Service:**
+```bash
+cd order-service/order-service
+./mvnw spring-boot:run
+```
+
+**Payment Service:**
+```bash
+cd payment-service/paymentservice
+./mvnw spring-boot:run
+```
+
+**Kitchen Service:**
+```bash
+cd kitchen-service/kitchenservice
+./mvnw spring-boot:run
+```
+
+**Delivery Service:**
+```bash
+cd delivery-service/deliveryservice
+./mvnw spring-boot:run
+```
+
+**Camunda Service:**
+*(Make sure this is started last, as it depends on the ActiveMQ broker initialized by the Order Service)*
+```bash
+cd camunda-service/camunda-service
+./mvnw spring-boot:run
+```
+
+### 2. Start the React Frontend
+Open a new terminal and run:
+```bash
+cd frontend
+npm install
+npm run dev
+```
+The UI should now be accessible at `http://localhost:5173` (or the port specified by Vite).
 
 ## Documentation
 For more detailed documentation, see the `/docs` directory which contains:
